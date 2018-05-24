@@ -21,8 +21,11 @@ public:
     int _attkCost;
     int _defCost;
 
+    bool _isCommanderKilled;
+
     BattleResolve();
     void fight(int attkPoints, int defPoints, int attkCcr, int defCcr, bool scavenge);
+    void recalcCosts(int attkPoints, int defPoints, bool scavenge);
 
 };
 

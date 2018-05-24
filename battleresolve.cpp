@@ -79,10 +79,25 @@ void BattleResolve::fight(int attkPoints, int defPoints, int attkCcr, int defCcr
         _defSurvivors = (defPoints - defendBaseLoss) + defendStraglers;
         _prisoners = attackModerateWounds;
         _winnerWounded = defendModerateWounds;
-        _attkCost = (float)(attkPoints - _attkSurvivors) * 3.0f;
 
+        _attkCost = (float)(attkPoints - _attkSurvivors) * 3.0f;
         _defCost = (float)(defPoints - _defSurvivors) * costFactor;
     }
 
+    _isCommanderKilled = Dice::roll(1,6) < 3;
+
+}
+
+void BattleResolve::recalcCosts(int attkPoints, int defPoints, bool scavenge)
+{
+    float costFactor = scavenge ? 1.5f : 3.0f;
+    if (_isAttkWins) {
+        _attkCost = (float)(attkPoints - _attkSurvivors) * costFactor;
+        _defCost = (float)(defPoints - _defSurvivors) * 3.0f;
+    }
+    else {
+        _attkCost = (float)(attkPoints - _attkSurvivors) * 3.0f;
+        _defCost = (float)(defPoints - _defSurvivors) * costFactor;
+    }
 }
 

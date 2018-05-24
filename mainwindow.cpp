@@ -37,5 +37,15 @@ void MainWindow::on_pbBattle_clicked()
                 (_battle._isAttkWins) ? "Attacker Wins" : "Defender Wins" );
     ui->leWinnerWounded->setText(QString::number(_battle._winnerWounded));
     ui->leAttkCost->setText(QString::number(_battle._attkCost));
+    ui->leBossKilled->setText( (_battle._isCommanderKilled) ? "Yes" : "No" );
 
+}
+
+void MainWindow::on_cbScavenge_toggled(bool checked)
+{
+    int attkPoints = ui->sbAttkPoints->value();
+    int defPoints = ui->sbDefPoints->value();
+    _battle.recalcCosts(attkPoints, defPoints, checked);
+    ui->leAttkCost->setText(QString::number(_battle._attkCost));
+    ui->leDefCost->setText(QString::number(_battle._defCost));
 }

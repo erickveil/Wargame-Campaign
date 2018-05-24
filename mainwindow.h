@@ -28,6 +28,8 @@ private slots:
 
     void on_pbBattle_clicked();
 
+    void on_cbScavenge_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
 };
