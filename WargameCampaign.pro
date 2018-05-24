@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     dice.cpp \
     randomtable.cpp \
     tableentry.cpp \
-    npcgenerator.cpp
+    npcgenerator.cpp \
+    battleresolve.cpp
 
 HEADERS  += mainwindow.h \
     dice.h \
     randomtable.h \
     tableentry.h \
-    npcgenerator.h
+    npcgenerator.h \
+    battleresolve.h
 
 FORMS    += mainwindow.ui
