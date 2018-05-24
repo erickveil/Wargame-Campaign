@@ -199,16 +199,37 @@ QString npcGenerator::createNpc()
     QString ccr = "CCR: " + QString::number(competency)
             + " (" + descriptor + ")\n";
 
+    // deformity
+    RandomTable deformTable;
+    deformTable.addEntry("Hunchback");
+    deformTable.addEntry("Missing Eye");
+    deformTable.addEntry("Missing Hand");
+    deformTable.addEntry("Peg Leg");
+    deformTable.addEntry("Club Foot");
+    deformTable.addEntry("Albino");
+    deformTable.addEntry("Asmatic");
+    deformTable.addEntry("Sickly");
+    deformTable.addEntry("Morbidly Obese");
+    deformTable.addEntry("Cleft Lip");
+    deformTable.addEntry("Missing Arm");
+    deformTable.addEntry("Giantism");
+    deformTable.addEntry("Dwarfism");
+    deformTable.addEntry("Drug-adled");
+    deformTable.addEntry("Drunk");
+    deformTable.addEntry("Severe Gambling Addiction");
+
     // formulate report
     int age = Dice::roll(1, 70) + 11;
+    QString gender = (Dice::roll(1,6) < 4) ? "Male" : "Female";
     QString npcStats = "Age: " + QString::number(age) + "\n";
+    npcStats += "Gender: " + gender + "\n";
     npcStats += primaryTrait + "\n";
     npcStats += ccr;
     for (int i = 0; i < traits.size(); ++i) {
         npcStats += traits[i] + "\n";
     }
     if (isHunchback) {
-        npcStats += "Hunchback\n";
+        npcStats += deformTable.getRollTableEntry() + "\n";
     }
     return npcStats;
 
