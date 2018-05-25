@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>486</width>
-    <height>768</height>
+    <width>552</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>151</width>
+      <width>201</width>
       <height>381</height>
      </rect>
     </property>
@@ -40,22 +40,22 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>220</x>
       <y>10</y>
-      <width>311</width>
-      <height>481</height>
+      <width>321</width>
+      <height>501</height>
      </rect>
     </property>
     <property name="title">
-     <string>Battle Resolution</string>
+     <string>Battle Summary</string>
     </property>
     <widget class="QWidget" name="formLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>20</y>
-       <width>301</width>
-       <height>451</height>
+       <x>10</x>
+       <y>30</y>
+       <width>286</width>
+       <height>411</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
@@ -67,22 +67,42 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="leAttkPts"/>
+       <widget class="QSpinBox" name="sbAttkPoints">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>5000</number>
+        </property>
+        <property name="value">
+         <number>500</number>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Defender Points</string>
+         <string>DefenderPoints</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="leDefPts"/>
+       <widget class="QSpinBox" name="sbDefPoints">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>5000</number>
+        </property>
+        <property name="value">
+         <number>500</number>
+        </property>
+       </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Attack CCR</string>
+         <string>Attacker CCR</string>
         </property>
        </widget>
       </item>
@@ -99,7 +119,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Defend CCR</string>
+         <string>Defender CCR</string>
         </property>
        </widget>
       </item>
@@ -114,103 +134,130 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QPushButton" name="pbRunBattle">
+       <widget class="QPushButton" name="pbBattle">
         <property name="text">
-         <string>Run Battle</string>
+         <string>Battle!</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="leWinner"/>
+       <widget class="QLineEdit" name="leWinner">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Attackers Survived</string>
+         <string>Attacker Survivors</string>
         </property>
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QLineEdit" name="leAttkSurvive"/>
+       <widget class="QLineEdit" name="leAttkSurvive">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Defenders Survived</string>
+         <string>Defender Survivors</string>
         </property>
        </widget>
       </item>
       <item row="6" column="1">
-       <widget class="QLineEdit" name="leDefSurvived"/>
+       <widget class="QLineEdit" name="leDefSurvive">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item row="7" column="0">
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Attackers Captured</string>
+         <string>Winner Captured</string>
         </property>
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QLineEdit" name="leAttkCaptured"/>
+       <widget class="QLineEdit" name="leLoseCaptured">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item row="8" column="0">
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="label_10">
         <property name="text">
-         <string>Defenders Captured</string>
+         <string>Winner Wounded*</string>
         </property>
        </widget>
       </item>
       <item row="8" column="1">
-       <widget class="QLineEdit" name="leDefCaptured"/>
-      </item>
-      <item row="9" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Attackers After Straglers</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="1">
-       <widget class="QLineEdit" name="leAttkStrag"/>
+       <widget class="QLineEdit" name="leWinnerWounded"/>
       </item>
       <item row="10" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Defenders After Straglers</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="1">
-       <widget class="QLineEdit" name="leDefStrag"/>
-      </item>
-      <item row="11" column="0">
-       <widget class="QCheckBox" name="cbWinnerScavenge">
-        <property name="text">
-         <string>Winner Scavenges?</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="0">
-       <widget class="QLabel" name="label_11">
+       <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Attacker Cost</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="1">
-       <widget class="QLineEdit" name="leAttkCost"/>
+      <item row="10" column="1">
+       <widget class="QLineEdit" name="leAttkCost">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
-      <item row="13" column="0">
-       <widget class="QLabel" name="label_12">
+      <item row="11" column="0">
+       <widget class="QLabel" name="label_8">
         <property name="text">
          <string>Defender Cost</string>
         </property>
        </widget>
       </item>
-      <item row="13" column="1">
-       <widget class="QLineEdit" name="leDefCost"/>
+      <item row="11" column="1">
+       <widget class="QLineEdit" name="leDefCost">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="cbScavenge">
+        <property name="text">
+         <string>Scavenge?</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>Commander Killed?</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <widget class="QLineEdit" name="leBossKilled"/>
       </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>450</y>
+       <width>281</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>* Wounded return to duty after 2 rounds</string>
+     </property>
     </widget>
    </widget>
   </widget>
