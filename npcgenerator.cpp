@@ -219,7 +219,7 @@ QString npcGenerator::createNpc()
     deformTable.addEntry("Severe Gambling Addiction");
 
     // formulate report
-    int age = Dice::roll(1, 70) + 11;
+    int age = Dice::roll(1, 40) + 11;
     QString gender = (Dice::roll(1,6) < 4) ? "Male" : "Female";
     QString npcStats = "Age: " + QString::number(age) + "\n";
     npcStats += "Gender: " + gender + "\n";
