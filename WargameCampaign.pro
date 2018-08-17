@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = WargameCampaign
 TEMPLATE = app
 
+CONFIG += c++14
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -18,13 +20,15 @@ SOURCES += main.cpp\
     randomtable.cpp \
     tableentry.cpp \
     npcgenerator.cpp \
-    battleresolve.cpp
+    battleresolve.cpp \
+    politicalnpc.cpp
 
 HEADERS  += mainwindow.h \
     dice.h \
     randomtable.h \
     tableentry.h \
     npcgenerator.h \
-    battleresolve.h
+    battleresolve.h \
+    politicalnpc.h
 
 FORMS    += mainwindow.ui

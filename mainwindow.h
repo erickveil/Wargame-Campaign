@@ -6,6 +6,7 @@
 #include "randomtable.h"
 #include "npcgenerator.h"
 #include "battleresolve.h"
+#include "politicalnpc.h"
 
 
 

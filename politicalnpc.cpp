@@ -1,13 +1,34 @@
-#include "npcgenerator.h"
+#include "politicalnpc.h"
 
-npcGenerator::npcGenerator()
+PoliticalNpc::PoliticalNpc()
 {
 
 }
 
-QString npcGenerator::createNpc()
+int PoliticalNpc::getMod(int abilityScore)
+{
+    if (abilityScore <= 1) { return -5; }
+    if (abilityScore == 2 || abilityScore == 3) { return -4; }
+    if (abilityScore == 4 || abilityScore == 5) { return -3; }
+    if (abilityScore == 6 || abilityScore == 7) { return -2; }
+    if (abilityScore == 8 || abilityScore == 9) { return -1; }
+    if (abilityScore == 10 || abilityScore == 11) { return 0; }
+    if (abilityScore == 12 || abilityScore == 13) { return 1; }
+    if (abilityScore == 14 || abilityScore == 15) { return 2; }
+    if (abilityScore == 16 || abilityScore == 17) { return 3; }
+    if (abilityScore == 18 || abilityScore == 19) { return 4; }
+    if (abilityScore == 20 || abilityScore == 21) { return 5; }
+    if (abilityScore == 22 || abilityScore == 23) { return 6; }
+    if (abilityScore == 24 || abilityScore == 25) { return 7; }
+    if (abilityScore == 26 || abilityScore == 27) { return 8; }
+    if (abilityScore == 28 || abilityScore == 29) { return 9; }
+    return 10;
+}
+
+QStringList PoliticalNpc::createTraitList()
 {
     QList<QString> discardPile;
+    QStringList traitList;
 
     RandomTable suits;
     suits.addEntry("Heart");
@@ -23,7 +44,7 @@ QString npcGenerator::createNpc()
 
     QString primaryTrait;
     if (firstSuit == "Spade")  {
-        primaryTrait = "Ambition";
+        primaryTrait = "Patriotic";
     }
     else if (firstSuit == "Club") {
         primaryTrait = "Love of War";
@@ -36,10 +57,10 @@ QString npcGenerator::createNpc()
     }
 
     primaryTrait += ": " + QString::number(firstVal);
+    traitList.append(primaryTrait);
 
     // other traits
     bool isHunchback = false;
-    QList<QString> traits;
     for (int i = 1; i < 7; ++i) {
 
         // draw a card
@@ -64,20 +85,19 @@ QString npcGenerator::createNpc()
         // interperet cards
         QString nextTrait;
         if (nextVal == 1) {
-            if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Disloyal Intriguer";
-            }
-            else if (nextSuit == "Diamond") {
-                nextTrait = "Loyal Intriguer";
+            if (nextSuit == "Spade"
+                    || nextSuit == "Club"
+                    || nextSuit == "Diamond") {
+                nextTrait = "Intriguer";
             }
             else {
-                nextTrait = "Exceptional Good Nature";
+                nextTrait = "Good Natured";
             }
             if (Dice::roll(1, 100) < 50) { isHunchback = true; }
         }
         else if (nextVal == 2) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Arrogance";
+                nextTrait = "Arrogant";
             }
             else {
                 nextTrait = "Merciful";
@@ -85,7 +105,7 @@ QString npcGenerator::createNpc()
         }
         else if (nextVal == 3) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Bad Temper";
+                nextTrait = "Bad Tempered";
             }
             else {
                 nextTrait = "Good Temper";
@@ -93,111 +113,76 @@ QString npcGenerator::createNpc()
         }
         else if (nextVal == 4) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Stupidity";
+                nextTrait = "Stupid";
             }
             else {
-                nextTrait = "Cowardice";
+                nextTrait = "Cowardly";
             }
         }
         else if (nextVal == 5) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Wisdom";
+                nextTrait = "Wise";
             }
             else {
-                nextTrait = "Cunning";
+                nextTrait = "Foolish";
             }
         }
         else if (nextVal == 6) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Laziness";
+                nextTrait = "Lazy";
             }
             else {
-                nextTrait = "Charm";
+                nextTrait = "Charming";
             }
         }
         else if (nextVal == 7) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Personality";
+                nextTrait = "Outgoing";
             }
             else {
-                nextTrait = "Jealous of Family Honor";
+                nextTrait = "Jealous of family honor";
             }
         }
         else if (nextVal == 8) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Cruelty";
+                nextTrait = "Cruel";
             }
             else {
-                nextTrait = "Generosity";
+                nextTrait = "Generous";
             }
         }
         else if (nextVal == 9) {
             if (nextSuit == "Spade") {
-                nextTrait = "Ugliness";
+                nextTrait = "Ugly";
             }
             else {
-                nextTrait = "Physical Beauty";
+                nextTrait = "Attractive";
             }
         }
         else if (nextVal == 10) {
-            if (nextSuit == "Diamond") {
-                nextTrait = "Completely Loyal";
-            }
-            else if (nextSuit == "Heart") {
-                nextTrait = "Loyalty: 4";
-            }
-            else if (nextSuit == "Club") {
-                nextTrait = "Loyalty: 2";
-            }
-            else {
-                nextTrait = "Disloyal in all things";
-            }
+            nextTrait = "Tempered";
         }
         else if (nextVal == 11) {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Unreliable liar and oathbreaker";
+                nextTrait = "Unreliable and dishonest";
             }
             else {
-                nextTrait = "Merciless and revenge-prone";
+                nextTrait = "Merciless and vengeful";
             }
         }
         else if (nextVal == 12) {
-            nextTrait = "Great Lover";
+            nextTrait = "Imposing";
         }
         else {
             if (nextSuit == "Spade" || nextSuit == "Club") {
-                nextTrait = "Energy";
+                nextTrait = "Energetic";
             }
             else {
-                nextTrait = "Courage";
+                nextTrait = "Couragious";
             }
         }
-        traits.append(nextTrait);
+        traitList.append(nextTrait);
     } // end main loop
-
-    // commander competency:
-    int competency = Dice::roll(1,6);
-    QString descriptor;
-    if (competency == 1) {
-        descriptor = "Inept Commander";
-    }
-    else if (competency == 2) {
-        descriptor = "Poor Commander";
-    }
-    else if (competency == 3) {
-        descriptor = "Somewhat Inefficient";
-    }
-    else if (competency == 4) {
-        descriptor = "Competent";
-    }
-    else if (competency == 5) {
-        descriptor = "Excellent Commander";
-    }
-    else {
-        descriptor = "Superb Commander";
-    }
-    QString ccr = "CCR: " + QString::number(competency)
-            + " (" + descriptor + ")\n";
 
     // deformity
     RandomTable deformTable;
@@ -219,26 +204,56 @@ QString npcGenerator::createNpc()
     deformTable.addEntry("Severe Gambling Addiction");
 
     // formulate report
-    int age = Dice::roll(1, 40) + 11;
-    QString gender = (Dice::roll(1,6) < 4) ? "Male" : "Female";
-    QString npcStats = "Age: " + QString::number(age) + "\n";
-    npcStats += "Gender: " + gender + "\n";
-    npcStats += primaryTrait + "\n";
-    npcStats += ccr;
-    for (int i = 0; i < traits.size(); ++i) {
-        npcStats += traits[i] + "\n";
-    }
     if (isHunchback) {
-        npcStats += deformTable.getRollTableEntry() + "\n";
+        traitList.append(deformTable.getRollTableEntry());
     }
-    return npcStats;
+    return traitList;
+
 
 }
 
-PoliticalNpc npcGenerator::createPolitician()
+void PoliticalNpc::initCharacter()
 {
-    PoliticalNpc npc;
-    npc.initCharacter();
-    return npc;
+    _isInit = true;
+    Loyalty = Dice::roll(3, 6);
+    Ambition = Dice::roll(3, 6);
+    Leadership = Dice::roll(3, 6);
+    Cunning = Dice::roll(3, 6);
+    Subtlety = Dice::roll(3, 6);
+    Perception = Dice::roll(3, 6);
+    LocalSupport = Dice::roll(3, 6);
+
+    Gender = (Dice::roll(1,6) < 4) ? "Male" : "Female";
+    Age = Dice::roll(1,40) + 13;
+    TraitList = createTraitList();
+}
+
+QString PoliticalNpc::asString()
+{
+    QString desc = Name + "\n"
+            + "Gender: " + Gender + "\n"
+            + "Age: " + QString::number(Age) + "\n"
+            + "Loyalty: " + QString::number(Loyalty)
+            + " (" + QString::number(getMod(Loyalty)) + ")\n"
+            + "Ambition: " + QString::number(Ambition)
+            + " (" + QString::number(getMod(Ambition)) + ")\n"
+            + "Leadership: " + QString::number(Leadership)
+            + " (" + QString::number(getMod(Leadership)) + ")\n"
+            + "Cunning: " + QString::number(Cunning)
+            + " (" + QString::number(getMod(Cunning)) + ")\n"
+            + "Subtlety: " + QString::number(Subtlety)
+            + " (" + QString::number(getMod(Subtlety)) + ")\n"
+            + "Perception: " + QString::number(Perception)
+            + " (" + QString::number(getMod(Perception)) + ")\n"
+            + "Support: " + QString::number(LocalSupport)
+            + " (" + QString::number(getMod(LocalSupport)) + ")\n"
+            ;
+    for (int i = 0; i < TraitList.size(); ++i) {
+        desc += TraitList[i] + "\n";
+    }
+
+    return desc;
+
+
 }
 

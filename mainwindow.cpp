@@ -15,7 +15,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pbNpc_clicked()
 {
-    QString desc = npcGenerator::createNpc();
+    //QString desc = npcGenerator::createNpc();
+    auto npc = npcGenerator::createPolitician();
+    QString desc = npc.asString();
+
     ui->pteOutput->setPlainText(desc);
 }
 
