@@ -215,6 +215,7 @@ QStringList PoliticalNpc::createTraitList()
 void PoliticalNpc::initCharacter()
 {
     _isInit = true;
+    Name = createName();
     Loyalty = Dice::roll(3, 6);
     Ambition = Dice::roll(3, 6);
     Leadership = Dice::roll(3, 6);
@@ -255,5 +256,23 @@ QString PoliticalNpc::asString()
     return desc;
 
 
+}
+
+QString PoliticalNpc::createName()
+{
+    // NOTE: The file path needs to go in the run dirctory:
+    // TODO: Figure out how to get more than one name out of this gen
+    // (It generates the same first name it picks, over and over, possibly
+    // from re-seeding)
+    // Possibly look as sample code
+    // TODO: select gender specific names from the referenced list
+    // TODO: Create custom syllable list to draw names from.
+    // TODO: Add a family name generator
+    TCODNamegen::parse("namegen/mingos_norse.cfg");
+    static char *newName = TCODNamegen::generate("Mingos Norse male");
+    //char * newName = TCODNamegen::generate("Mingos Norse female");
+    QString qName = QString(newName);
+    TCODNamegen::destroy();
+    return qName;
 }
 
