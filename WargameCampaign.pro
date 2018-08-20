@@ -98,8 +98,8 @@ FORMS    += mainwindow.ui
 INCLUDEPATH += libtcod-1.5.1/include
 INCLUDEPATH += libtcod-1.5.1/include/gui
 
-LIBS += -L"/home/anon/src/Wargame-Campaign/libtcod-1.5.1/" -ltcod
-LIBS += -L"/home/anon/src/Wargame-Campaign/libtcod-1.5.1/" -ltcodxx
-LIBS += -L"/home/anon/src/Wargame-Campaign/libtcod-1.5.1/" -ltcodgui
+LIBS += -L$$PWD/libtcod-1.5.1 -ltcod
+LIBS += -L$$PWD/libtcod-1.5.1 -ltcodxx
+LIBS += -L$$PWD/libtcod-1.5.1 -ltcodgui
 
 

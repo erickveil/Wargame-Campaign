@@ -266,9 +266,9 @@ QString PoliticalNpc::createName(QString gender)
     // NOTE: The file path needs to go in the run dirctory:
     // TODO: Create custom syllable list to draw names from.
     // TODO: Add a family name generator
-    //TCODNamegen::parse("namegen/mingos_norse.cfg");
+    TCODNamegen::parse("namegen/mingos_norse.cfg");
     char *newName;
-    if (Gender == "Female") {
+    if (gender == "Female") {
         newName = TCODNamegen::generate("Mingos Norse female");
     }
     else {
