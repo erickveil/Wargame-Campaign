@@ -3,8 +3,11 @@
 
 #include <QString>
 #include <QStringList>
+#include <QtMath>
+
 #include "randomtable.h"
 #include "libtcod.hpp"
+
 #include <string>
 
 class PoliticalNpc
@@ -33,7 +36,8 @@ public:
 
     void initCharacter();
     QString asString();
-    QString createName();
+    QString createName(QString gender);
+    int getCCR();
 };
 
 #endif // POLITICALNPC_H

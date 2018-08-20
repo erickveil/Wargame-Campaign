@@ -215,7 +215,6 @@ QStringList PoliticalNpc::createTraitList()
 void PoliticalNpc::initCharacter()
 {
     _isInit = true;
-    Name = createName();
     Loyalty = Dice::roll(3, 6);
     Ambition = Dice::roll(3, 6);
     Leadership = Dice::roll(3, 6);
@@ -225,6 +224,7 @@ void PoliticalNpc::initCharacter()
     LocalSupport = Dice::roll(3, 6);
 
     Gender = (Dice::roll(1,6) < 4) ? "Male" : "Female";
+    Name = createName(Gender);
     Age = Dice::roll(1,40) + 13;
     TraitList = createTraitList();
 }
@@ -234,6 +234,8 @@ QString PoliticalNpc::asString()
     QString desc = Name + "\n"
             + "Gender: " + Gender + "\n"
             + "Age: " + QString::number(Age) + "\n"
+            + "CCR: " + QString::number(getCCR()) + "\n"
+            + "\n"
             + "Loyalty: " + QString::number(Loyalty)
             + " (" + QString::number(getMod(Loyalty)) + ")\n"
             + "Ambition: " + QString::number(Ambition)
@@ -248,6 +250,7 @@ QString PoliticalNpc::asString()
             + " (" + QString::number(getMod(Perception)) + ")\n"
             + "Support: " + QString::number(LocalSupport)
             + " (" + QString::number(getMod(LocalSupport)) + ")\n"
+            + "\n"
             ;
     for (int i = 0; i < TraitList.size(); ++i) {
         desc += TraitList[i] + "\n";
@@ -258,21 +261,25 @@ QString PoliticalNpc::asString()
 
 }
 
-QString PoliticalNpc::createName()
+QString PoliticalNpc::createName(QString gender)
 {
     // NOTE: The file path needs to go in the run dirctory:
-    // TODO: Figure out how to get more than one name out of this gen
-    // (It generates the same first name it picks, over and over, possibly
-    // from re-seeding)
-    // Possibly look as sample code
-    // TODO: select gender specific names from the referenced list
     // TODO: Create custom syllable list to draw names from.
     // TODO: Add a family name generator
-    TCODNamegen::parse("namegen/mingos_norse.cfg");
-    static char *newName = TCODNamegen::generate("Mingos Norse male");
-    //char * newName = TCODNamegen::generate("Mingos Norse female");
+    //TCODNamegen::parse("namegen/mingos_norse.cfg");
+    char *newName;
+    if (Gender == "Female") {
+        newName = TCODNamegen::generate("Mingos Norse female");
+    }
+    else {
+        newName = TCODNamegen::generate("Mingos Norse male");
+    }
     QString qName = QString(newName);
-    TCODNamegen::destroy();
     return qName;
+}
+
+int PoliticalNpc::getCCR()
+{
+    return qRound((float)Leadership / (20.0f / 6.0f));
 }
 
