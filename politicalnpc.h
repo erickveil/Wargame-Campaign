@@ -24,6 +24,13 @@ public:
     int Perception;
     int LocalSupport;
 
+    int Strength;
+    int Dexterity;
+    int Constitution;
+    int Intelligence;
+    int Wisdom;
+    int Charisma;
+
     QString Name;
     QString Gender;
     int Age;
@@ -35,9 +42,17 @@ public:
     static QStringList createTraitList();
 
     void initCharacter();
+    void initAbilityScores();
     QString asString();
     QString createName(QString gender);
     int getCCR();
+
+    QString StrDesc();
+    QString DexDesc();
+    QString ConDesc();
+    QString IntDesc();
+    QString WisDesc();
+    QString ChaDesc();
 };
 
 #endif // POLITICALNPC_H

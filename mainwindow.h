@@ -17,7 +17,7 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+    PoliticalNpc _npc;
     BattleResolve _battle;
 
 public:

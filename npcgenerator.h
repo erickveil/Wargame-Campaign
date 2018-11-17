@@ -14,6 +14,7 @@ public:
     static QString createNpc();
     static PoliticalNpc createPolitician();
 
+
 };
 
 #endif // NPCGENERATOR_H

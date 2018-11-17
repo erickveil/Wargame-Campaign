@@ -222,11 +222,22 @@ void PoliticalNpc::initCharacter()
     Subtlety = Dice::roll(3, 6);
     Perception = Dice::roll(3, 6);
     LocalSupport = Dice::roll(3, 6);
+    initAbilityScores();
 
     Gender = (Dice::roll(1,6) < 4) ? "Male" : "Female";
     Name = createName(Gender);
     Age = Dice::roll(1,40) + 13;
     TraitList = createTraitList();
+}
+
+void PoliticalNpc::initAbilityScores()
+{
+    Strength = Dice::roll(3,6);
+    Dexterity = Dice::roll(3,6);
+    Constitution = Dice::roll(3,6);
+    Intelligence = Dice::roll(3,6);
+    Wisdom = Dice::roll(3,6);
+    Charisma = Dice::roll(3,6);
 }
 
 QString PoliticalNpc::asString()
@@ -236,7 +247,16 @@ QString PoliticalNpc::asString()
             + "Age: " + QString::number(Age) + "\n"
             + "CCR: " + QString::number(getCCR()) + "\n"
             + "\n"
-            + "Loyalty: " + QString::number(Loyalty)
+
+            "Str: " + QString::number(Strength) + " " + StrDesc() + "\n"
+            + "Dex: " + QString::number(Dexterity) + " " + DexDesc() + "\n"
+            + "Con: " + QString::number(Constitution) + " " + ConDesc() + "\n"
+            + "Int: " + QString::number(Intelligence) + " " + IntDesc() + "\n"
+            + "Wis: " + QString::number(Wisdom) + " " + WisDesc() + "\n"
+            + "Cha: " + QString::number(Charisma) + " " + ChaDesc() + "\n"
+            + "\n"
+
+            "Loyalty: " + QString::number(Loyalty)
             + " (" + QString::number(getMod(Loyalty)) + ")\n"
             + "Ambition: " + QString::number(Ambition)
             + " (" + QString::number(getMod(Ambition)) + ")\n"
@@ -281,5 +301,57 @@ QString PoliticalNpc::createName(QString gender)
 int PoliticalNpc::getCCR()
 {
     return qRound((float)Leadership / (20.0f / 6.0f));
+}
+
+QString PoliticalNpc::StrDesc()
+{
+    if (Strength <= 8) { return "Weakling"; }
+    if (Strength <= 12) { return "Hearty"; }
+    return "Strong";
+}
+
+QString PoliticalNpc::DexDesc()
+{
+    if (Dexterity <= 8) { return "Clumsy (Missile fire -1)"; }
+    if (Dexterity <= 12) { return "Capable"; }
+    return "Nimble (Missile fire +1)";
+}
+
+QString PoliticalNpc::ConDesc()
+{
+    if (Constitution <= 6) { return "Sickly"; }
+    if (Constitution <= 8) {
+        if (Dice::roll(1, 100) > 50) { return "Dead."; }
+        return "Pale and wan.";
+    }
+    if (Constitution <= 12) {
+        if (Dice::roll(1, 100) > 90) { return "Dead."; }
+        return "Average Health.";
+    }
+    if (Constitution <= 14) {
+        return "Will withstand adversity.";
+    }
+    return "Hearty (+1 to hit dice)";
+}
+
+QString PoliticalNpc::IntDesc()
+{
+    if (Intelligence <= 8) { return "Dolt"; }
+    if (Intelligence <= 12) { return "Clear-eyed"; }
+    return "Brilliant";
+}
+
+QString PoliticalNpc::WisDesc()
+{
+    if (Wisdom <= 8) { return "Fool"; }
+    if (Wisdom <= 12) { return "Perceptive"; }
+    return "Wise";
+}
+
+QString PoliticalNpc::ChaDesc()
+{
+    if (Charisma <= 8) { return "Outcast"; }
+    if (Charisma <= 12) { return "Likeable"; }
+    return "Highly regarded";
 }
 
